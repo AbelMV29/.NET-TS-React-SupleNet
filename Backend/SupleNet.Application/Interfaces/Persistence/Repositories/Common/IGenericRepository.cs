@@ -8,6 +8,7 @@
         IQueryable<T> GetAllReadOnly();
         Task<T> UpdateAsync(T entity);
         Task<T> AddAsync(T entity);
+        Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> entities);
         Task DeleteAsync(T entity);
         Task SaveChangesAsync();
     }
