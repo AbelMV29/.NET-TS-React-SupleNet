@@ -14,4 +14,11 @@
         Pending = 0,
         Payed = 1
     }
+
+    public enum FilterProducts
+    {
+        Lower,
+        Upper,
+        Feature
+    }
 }

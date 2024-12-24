@@ -4,7 +4,6 @@ using SupleNet.Application.Responses.Common;
 using SupleNet.Application.Responses.Identity;
 using SupleNet.Application.UseCases.AppUser.Command.Login;
 using SupleNet.Application.UseCases.AppUser.Command.Register;
-using SupleNet.Application.UseCases.Product.Commands.AddProduct;
 
 namespace SupleNet.API.Controllers
 {

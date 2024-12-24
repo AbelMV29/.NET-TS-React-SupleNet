@@ -17,10 +17,10 @@ namespace SupleNet.Persistence.Data
         public DbSet<Gallery> Galleries { get; set; }
         public DbSet<ItemCart> ItemCarts { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<Sale> Sales { get; set; }
         public DbSet<SaleDetail> SaleDetails { get; set; }
         public DbSet<Valoration> Valorations { get; set; }
+        public DbSet<Brand> Brands { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

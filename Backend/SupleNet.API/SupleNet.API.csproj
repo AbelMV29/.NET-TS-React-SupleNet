@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SupleNet.Cloudinary\SupleNet.Cloudinary.csproj" />
     <ProjectReference Include="..\SupleNet.Persistence\SupleNet.Persistence.csproj" />
   </ItemGroup>
 

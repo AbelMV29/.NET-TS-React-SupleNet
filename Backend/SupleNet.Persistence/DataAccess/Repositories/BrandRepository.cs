@@ -5,9 +5,9 @@ using SupleNet.Persistence.DataAccess.Repositories.Common;
 
 namespace SupleNet.Persistence.DataAccess.Repositories
 {
-    internal class ProductCategoryRepository : GenericRepository<ProductCategory>, IProductCategoryRepository
+    internal class BrandRepository : GenericRepository<Brand>, IBrandRepository
     {
-        public ProductCategoryRepository(SupleNetContext context) : base(context)
+        public BrandRepository(SupleNetContext context) : base(context)
         {
         }
     }

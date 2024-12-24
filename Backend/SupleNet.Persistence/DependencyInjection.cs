@@ -6,8 +6,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using SupleNet.Application.Interfaces.Persistence.Identity;
 using SupleNet.Application.Interfaces.Persistence.Repositories;
+using SupleNet.Application.Interfaces.Persistence.UnitOfWork;
 using SupleNet.Domain.Entities;
 using SupleNet.Persistence.Data;
+using SupleNet.Persistence.DataAccess;
 using SupleNet.Persistence.DataAccess.Repositories;
 using SupleNet.Persistence.Models;
 using SupleNet.Persistence.Services;
@@ -19,30 +21,7 @@ namespace SupleNet.Persistence
     {
         public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(config =>
-            {
-                config.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:Key"]!)),
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidIssuer = configuration["JwtSettings:Issuer"],
-                    ValidAudience = configuration["JwtSettings:Audience"]
-
-                };
-            });
-
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("Customer", policy => policy.RequireRole("Customer"));
-                options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
-            });
+            services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 
             services.AddDbContext<SupleNetContext>(options =>
             {
@@ -57,16 +36,42 @@ namespace SupleNet.Persistence
             }).AddEntityFrameworkStores<SupleNetContext>()
             .AddDefaultTokenProviders();
 
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(config =>
+            {
+                config.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:Key"]!)),
+                    ValidateIssuer = true,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    ValidIssuer = configuration["JwtSettings:Issuer"],
+                    ValidAudience = configuration["JwtSettings:Audience"]
+
+                };
+            });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Customer", policy => policy.RequireRole("Customer"));
+                options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
+            });
+
+            
+
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<UserManager<AppUser>>();
             services.AddScoped<SignInManager<AppUser>>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
-            services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
+            services.AddScoped<IGalleryRepository, GalleryRepository>();
+            services.AddScoped<IBrandRepository, BrandRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
-
-            
 
             return services;
         }

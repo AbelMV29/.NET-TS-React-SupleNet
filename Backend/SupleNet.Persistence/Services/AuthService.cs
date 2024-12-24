@@ -92,7 +92,7 @@ namespace SupleNet.Persistence.Services
                 audience: _jwtSettings.Audience,
                 claims: GetClaimsUser(appUser, role),
                 signingCredentials: new SigningCredentials(new SymmetricSecurityKey(keyInBytes), SecurityAlgorithms.HmacSha256),
-                expires: DateTime.UtcNow.AddHours(-3).AddMinutes(_jwtSettings.DurationInMinutes));
+                expires: DateTime.UtcNow.AddMinutes(_jwtSettings.DurationInMinutes));
 
             return new JwtSecurityTokenHandler().WriteToken(jwtToken);
         }

@@ -1,4 +1,4 @@
-
+using SupleNet.Cloudinary;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.OpenApi.Models;
 using SupleNet.Application;
@@ -14,20 +14,14 @@ namespace SupleNet.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
             builder.Services.AddSwagger();
 
+            builder.Services.AddHttpContextAccessor();
             builder.Services.AddPersistence(builder.Configuration);
             builder.Services.AddApplication();
-            builder.Services.AddRouting(config =>
-            {
-                config.LowercaseUrls = true;
-            });
+            builder.Services.AddCloudinary(builder.Configuration);
 
             var app = builder.Build();
 

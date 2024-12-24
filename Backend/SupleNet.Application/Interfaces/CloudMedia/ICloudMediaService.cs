@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
+using SupleNet.Application.Responses.CloudMedia;
 
 namespace SupleNet.Application.Interfaces.CloudMedia
 {
     public interface ICloudMediaService
     {
-        Task<string?> UploadImage(IFormFile image);
-        Task<string?> UploadVideo(IFormFile video);
-        Task DeleteMedia(string id);
+        Task<CloudMediaResponse?> UploadImage(IFormFile image);
+        Task<CloudMediaResponse?> UploadVideo(IFormFile video);
+        void DeleteMedia(string id);
     }
 }

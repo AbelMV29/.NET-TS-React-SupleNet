@@ -34,9 +34,9 @@ namespace SupleNet.Persistence.DataAccess.Repositories.Common
 
         public IQueryable<T> GetAllReadOnly() => _set.AsNoTracking();
 
-        public async Task<T?> GetAsync(Guid id) => await _set.SingleOrDefaultAsync(e => e.ID == id);
+        public async Task<T?> GetAsync(Guid id) => await _set.SingleOrDefaultAsync(e => e.Id == id);
 
-        public async Task<T?> GetReadOnlyAsync(Guid id) => await _set.AsNoTracking().SingleOrDefaultAsync(e => e.ID == id);
+        public async Task<T?> GetReadOnlyAsync(Guid id) => await _set.AsNoTracking().SingleOrDefaultAsync(e => e.Id == id);
 
         public async Task SaveChangesAsync() => await _context.SaveChangesAsync();
 

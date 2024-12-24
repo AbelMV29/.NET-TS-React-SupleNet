@@ -3,8 +3,7 @@ using SupleNet.Domain.Entities;
 
 namespace SupleNet.Application.Interfaces.Persistence.Repositories
 {
-    public interface IProductRepository : IGenericRepository<Product>
+    public interface ISaleDetailRepository : IGenericRepository<SaleDetail>
     {
-        IQueryable<Product> GetAllReadOnlyIncludeSaleDetailsAsync();
     }
 }
