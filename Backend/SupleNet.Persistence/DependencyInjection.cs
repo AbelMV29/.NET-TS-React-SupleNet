@@ -70,6 +70,7 @@ namespace SupleNet.Persistence
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IGalleryRepository, GalleryRepository>();
             services.AddScoped<IBrandRepository, BrandRepository>();
+            services.AddScoped<IItemCartRepository, ItemCartRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
