@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SupleNet.Persistence.Data;
 
@@ -11,9 +12,11 @@ using SupleNet.Persistence.Data;
 namespace SupleNet.Persistence.Migrations
 {
     [DbContext(typeof(SupleNetContext))]
-    partial class SupleNetContextModelSnapshot : ModelSnapshot
+    [Migration("20241225000539_RemoveProductCategoriesEntityAndAddedImageColumn")]
+    partial class RemoveProductCategoriesEntityAndAddedImageColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

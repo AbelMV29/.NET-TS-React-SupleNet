@@ -43,6 +43,7 @@ namespace SupleNet.Application.UseCases.Product.Commands.AddProduct
                 Name = request.Name,
                 Price = request.Price,
                 Description = request.Description,
+                CategoryId = request.CategoryId,
                 BrandId = request.BrandId,
                 CreatedBy = currentUserId,
                 CreatedDate = DateTime.UtcNow.AddHours(-3)

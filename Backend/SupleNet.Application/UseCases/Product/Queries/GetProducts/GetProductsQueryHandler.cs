@@ -9,6 +9,12 @@ namespace SupleNet.Application.UseCases.Product.Queries.GetProducts
     internal sealed class GetProductsQueryHandler : IRequestHandler<GetProductsQuery, Result<GetProductsQueryResponse>>
     {
         private readonly IProductRepository _productRepository;
+
+        public GetProductsQueryHandler(IProductRepository productRepository)
+        {
+            _productRepository = productRepository;
+        }
+
         public async Task<Result<GetProductsQueryResponse>> Handle(GetProductsQuery request, CancellationToken cancellationToken)
         {
             var productsQuery = _productRepository.GetAllReadOnlyIncludeSaleDetailsAsync();
@@ -19,7 +25,7 @@ namespace SupleNet.Application.UseCases.Product.Queries.GetProducts
             if(request.CategoryId is not null)
                 productsQuery = productsQuery.Where(p=>p.CategoryId ==  request.CategoryId);
 
-            if (string.IsNullOrEmpty(request.Name))
+            if (!string.IsNullOrEmpty(request.Name))
                 productsQuery = productsQuery.Where(p => p.Name.ToLower().Contains(request.Name.ToLower()));
 
             productsQuery = request.FilterProducts switch
