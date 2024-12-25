@@ -8,6 +8,7 @@ namespace SupleNet.Domain.Entities
         public Guid ProductId { get; set;}
         [ForeignKey(nameof(ProductId))]
         public Product Product { get; set; } = null!;
+        public string ImageId { get; set; } = string.Empty;
         public string ImageURL { get; set; } = string.Empty;
     }
 }
