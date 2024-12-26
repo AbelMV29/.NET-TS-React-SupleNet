@@ -5,3 +5,12 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
+.active
+{
+  @apply text-violet-800;
+}
+
+ul>li
+{
+   @apply hover:text-violet-500 transition-colors
+}
