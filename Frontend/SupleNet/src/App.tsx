@@ -1,9 +1,12 @@
+import { GlobalAuthContextProvider } from "./context/user-context";
 import { Router } from "./Router";
 
 function App() {
 
   return (
-    <Router></Router>
+    <GlobalAuthContextProvider>
+      <Router></Router>
+    </GlobalAuthContextProvider>  
   );
 }
 

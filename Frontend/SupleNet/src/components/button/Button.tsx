@@ -4,22 +4,23 @@ interface ButtonProps
 {
     text: string,
     action? : ()=>void,
-    color: string,
-    path?: string
+    path?: string,
+    type?: 'button' | 'reset' | 'submit',
+    children?: React.ReactNode
 }
 
-export function Button({text, action, path}: ButtonProps)
+export function Button({text, action, path, type, children}: ButtonProps)
 {
     if(path)
     {
         return(
             <Link to={path}>
                 <button 
-                type="button" 
+                type={type?? "button"} 
                 className={`font-semibold bg-violet-800 px-3 py-2 hover:opacity-85 transition-[.75s] text-white rounded-md`}
                 onClick={action}
                 >
-                    {text}
+                    {children} {text}
                 </button>
             </Link>
             
@@ -28,11 +29,11 @@ export function Button({text, action, path}: ButtonProps)
 
     return(
         <button 
-        type="button" 
+        type={type?? "button"} 
         className={`font-semibold bg-violet-800 px-3 py-2 hover:opacity-85 transition-[.75s] text-white rounded-md`}
         onClick={action}
         >
-            {text}
+            {children} {text}
         </button>
         );
 }
