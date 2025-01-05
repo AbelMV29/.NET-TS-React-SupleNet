@@ -4,7 +4,7 @@ import { supleNetInstanceAxios } from "./common-service";
 
 export interface GetProductsQuery
 {
-    page: number,
+    page: number | null,
     name: string,
     filterProducts?: FIlterProducts,
     categoryId?: string | null,
@@ -20,10 +20,13 @@ export enum FIlterProducts
 
 export async function GetProducts({page = 1, name = "", filterProducts = FIlterProducts.Feature, categoryId = null, brandId = null} : GetProductsQuery, controller: AbortController) : Promise<Result<PaginationProducts>>
 {
+    const pageUrl: string = `&page=${page?? 1}`;
+    const nameUrl: string = `&name=${name?? ''}`;
+    const filterProductsUrl: string = `&filterProducts=${filterProducts?? ''}`;
     const categoryUrl: string = `&categoryId=${categoryId?? ''}`;
     const brandUrl: string = `&brandId=${brandId?? ''}`;
     return supleNetInstanceAxios
-    .get<Result<PaginationProducts>>(`/products?Page=${page}&name=${name}&filterProducts=${filterProducts}${categoryUrl}${brandUrl}`, {signal: controller.signal})
+    .get<Result<PaginationProducts>>(`/products?${pageUrl + nameUrl + filterProductsUrl + categoryUrl + brandUrl}`, {signal: controller.signal})
     .then(response=>
     {
         return response.data;

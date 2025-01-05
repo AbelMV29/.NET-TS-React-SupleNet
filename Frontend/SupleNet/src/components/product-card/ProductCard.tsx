@@ -7,13 +7,13 @@ export function ProductCard({id, name, image, price}:Products)
 {
     return(
         <Link 
-        to={`products/${id}`} 
+        to={`/products/${id}`} 
         key={id} 
-        className="flex flex-col p-2 py-4 items-center gap-4 shadow-2xl w-[300px] hover:-translate-y-2 transition-[1s]">
-            <img src={image} className=" w-full"/>
-            <h4 className="font-bold">{name}</h4>
-            <p>${price.toFixed(2)}</p>
-            <Button text="Comprar" type="button"><AddShoppingCartIcon></AddShoppingCartIcon></Button>
+        className="flex flex-col p-2 justify-start text-center gap-2 shadow-2xl items-center h-[250px] w-[200px] hover:-translate-y-2 transition-[1s]">
+            <img src={image} className="w-full"/>
+            <h4 className="font-bold text-[16px]">{name}</h4>
+            <p className="text-sm">${price.toFixed(2)}</p>
+            <Button size="small" text="Comprar" type="button"><AddShoppingCartIcon></AddShoppingCartIcon></Button>
         </Link>
     );
 }

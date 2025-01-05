@@ -2,22 +2,43 @@ import { useEffect, useState } from "react";
 import { GetByNameOrder } from "../services/common-service";
 
 export function useFetchNameOrder<T>(url:string) : 
-[string, React.Dispatch<React.SetStateAction<string>>, boolean, React.Dispatch<React.SetStateAction<boolean>>, T[]]
+[boolean, string | null, string, React.Dispatch<React.SetStateAction<string>>, boolean, React.Dispatch<React.SetStateAction<boolean>>, T[]]
 {
-    const [name, setName] = useState("");
-    const [orderByDate, setOrderByDate] = useState(false);
+    const [loaded, setLoaded] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const [name, setName] = useState(" ");
+    const [orderByDate, setOrderByDate] = useState(true);
     const [data, setData] = useState<T[]>([]);
 
     useEffect(()=>
     {
+        setLoaded(false);
+        setError(null);
         const controller : AbortController = new AbortController();
         const fetchData = async ()=>
         {
-            const resultData = await GetByNameOrder<T>(`${url}?name=${name}&OrderByDate=${orderByDate}`, controller);
-            if(resultData.isSuccess)
+            try
             {
+                const resultData = await GetByNameOrder<T>(`${url}?name=${name}&OrderByDate=${orderByDate}`, controller);
                 setData(resultData.data);
+                setError(null);
+                return;
             }
+            catch(error)
+            {
+                const err = error as Error;
+                if(err.name === "AbortError")
+                    return;
+                setError(err.name);
+            }
+            finally
+            {
+                if(!controller.signal.aborted)
+                    setLoaded(true);
+            }
+            
+
+            
         }
         fetchData();
 
@@ -25,7 +46,7 @@ export function useFetchNameOrder<T>(url:string) :
         {
             controller.abort();
         });
-    }, [name, orderByDate]);
+    }, [name, orderByDate, url]);
 
-    return [name, setName, orderByDate, setOrderByDate, data]
+    return [loaded, error, name, setName, orderByDate, setOrderByDate, data]
 }

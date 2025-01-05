@@ -6,10 +6,10 @@ import { Footer } from "./components/footer/Footer";
 export function LayoutPage()
 {
     return(
-        <div className="flex flex-col w-full min-h-screen gap-4">
+        <div className="flex flex-col w-full min-h-screen">
             <Navbar></Navbar>
             <Toaster/>
-            <main className="flex-grow">
+            <main className="flex-grow flex">
                 <Outlet></Outlet>
             </main>
             <Footer></Footer>

@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
 import { ResultSearchItem } from "../result-search-item/ResultSearchItem";
-import { Products } from "../../../../models/product";
-import { GetProducts } from "../../../../services/product-service";
 import { CircularProgress } from "@mui/material";
+import { useFetchProducts } from "../../../../hooks/useFetchProducts";
 
 interface ResultSearchProps
 {
@@ -13,44 +11,7 @@ const baseDiv : string = "absolute flex flex-col gap-2 mt-1 w-[350px] bg-slate-5
 
 export function ResultSearch({name} : ResultSearchProps)
 {
-    const [data, setData] = useState<Products[]>([])
-    const [loaded, setLoaded] = useState(false);
-    const [message, setMessage] = useState<string| null>(null);
-    useEffect(()=>
-    {
-        if(!name)
-            return;
-        const controller: AbortController = new AbortController();
-        const fetchData = async ()=>
-        {
-            try
-            {
-                const dataResponse = await GetProducts({name:name, page:1}, controller);
-
-                setData(dataResponse.data.products);
-                setMessage(null);
-            }
-            catch(err)
-            {
-                const result = err as Error
-                setMessage(result.message);
-
-                console.log(result.message);
-            }
-            finally
-            {
-                setLoaded(true);
-            }
-            
-
-        }
-        fetchData();
-
-        return(()=>
-            {
-                controller.abort();
-            });
-    }, [name])
+    const [loaded, error, data] = useFetchProducts({name: name, page: 1,});
 
     if(name && !loaded)
         return (
@@ -59,19 +20,19 @@ export function ResultSearch({name} : ResultSearchProps)
         </div>
         );
 
-    if(name && message)
+    if(name && error)
         return (
         <div className={baseDiv}>
-            <p className="text-red-600">{message}</p>
+            <p className="text-red-600">{error}</p>
         </div>
         );
 
-    if(name && loaded && !message)
+    if(name && loaded && !error)
     {
         return(<div className={baseDiv}>
             <p>Resultados para proteina {name}</p>
             <hr></hr>
-            {data.length > 0 ? data.map(p=>
+            {data!.products.length > 0 ? data?.products.map(p=>
                 {
                     return(<ResultSearchItem key={p.id} image={p.image} name={p.name}/>);
                 }

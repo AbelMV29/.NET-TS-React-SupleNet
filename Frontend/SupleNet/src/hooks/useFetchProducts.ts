@@ -12,6 +12,7 @@ export function useFetchProducts({name, page, filterProducts, brandId, categoryI
     {
         const controller : AbortController = new AbortController();
         setLoaded(false);
+        setError(null);
         const fetchData = async()=>
         {
             try{
@@ -19,14 +20,17 @@ export function useFetchProducts({name, page, filterProducts, brandId, categoryI
                 setData(response.data);
                 setError(null);
             }
-            catch(err)
+            catch(error)
             {
-                const error = err as Error;
-                setError(error.message);
+                const err = error as Error;
+                if(err.name === "AbortError")
+                    return;
+                setError(err.message);
             }
             finally
             {
-                setLoaded(true);
+                if(!controller.signal.aborted)
+                    setLoaded(true);
             }
 
         }
