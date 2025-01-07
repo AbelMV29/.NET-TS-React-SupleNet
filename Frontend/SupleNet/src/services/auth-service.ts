@@ -22,8 +22,7 @@ export async function LoginService(loginModel: LoginFormType, controller: AbortC
             };
         })
         .catch((error) => {
-            console.log(error);
-            throw new Error(error.response?.data?.message || "Ocurrió un error inesperado");
+            throw new Error(error.response?.data || "Ocurrió un error inesperado");
         });
 }
 
@@ -39,7 +38,7 @@ export async function RegisterService(registerModel: RegisterFormType, controlle
             };
         })
         .catch((error) => {
-            throw new Error(error.response?.data?.message || "Ocurrió un error inesperado");
+            throw new Error(error.response?.data || "Ocurrió un error inesperado");
         });
 }
 

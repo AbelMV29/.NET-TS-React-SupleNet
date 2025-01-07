@@ -4,6 +4,7 @@ import { ResultSearch } from "../../components/result-search/ResultSearch";
 import { useState } from "react";
 import { CurrentUser } from "../current-user/CurrentUser";
 import { ProductNavItem } from "../products-nav-item/ProductsNavItem";
+import { ShoppingCart } from "../shopping-cart/ShoppingCart";
 
 export function Navbar()
 {
@@ -37,7 +38,11 @@ export function Navbar()
                 onChange={setName}></Input>
                 {search ===true? <ResultSearch name={name}></ResultSearch> : <></>}
             </div>
-            <CurrentUser></CurrentUser>
+            <div className="flex flex-row gap-5 items-center">
+                <ShoppingCart></ShoppingCart>
+                <CurrentUser></CurrentUser>
+            </div>
+            
         </nav>
         
     );

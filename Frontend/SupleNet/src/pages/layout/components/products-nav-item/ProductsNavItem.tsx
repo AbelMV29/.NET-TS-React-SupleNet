@@ -15,7 +15,7 @@ export function ProductNavItem()
                 <div className="flex flex-col absolute gap-3 p-2 rounded-lg bg-white w-max shadow-2xl left-[-10px]" id="categories">
                     {data.map(c=>
                 {
-                    return (<Link to={`products?category=${c.id}`}>{c.name}</Link>);
+                    return (<Link key={c.id} to={`products?categoryId=${c.id}`}>{c.name}</Link>);
                 }
                 )}
                 </div>
