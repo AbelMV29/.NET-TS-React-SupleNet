@@ -21,6 +21,8 @@ namespace SupleNet.Application.UseCases.Brand.Commands.AddBrand
         public async Task<Result<Unit>> Handle(AddBrandCommand request, CancellationToken cancellationToken)
         {
             var currentUserId = new Guid(_httpContext.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+            if(await _brandRepository.ExistByName(request.Name))
+                return Result<Unit>.Failed($"La marca con el nombre {request.Name} ya existe", HttpStatusCode.BadRequest);
 
             try
             {

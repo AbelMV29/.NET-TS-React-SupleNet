@@ -104,7 +104,7 @@ namespace SupleNet.Application.UseCases.Product.Commands.AddProduct
                 {
                     _cloudMediaService.DeleteMedia(response.Id);
                 }
-                return Result<Unit>.Failed($"Error: {ex.Message}", HttpStatusCode.InternalServerError);
+                return Result<Unit>.Failed(ex.Message, HttpStatusCode.InternalServerError);
             }
             
         }

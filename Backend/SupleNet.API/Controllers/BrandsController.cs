@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using SupleNet.Application.Responses.Common;
 using SupleNet.Application.UseCases.Brand.Commands.AddBrand;
 using SupleNet.Application.UseCases.Brand.Queries.GetBrands;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace SupleNet.API.Controllers
 {
@@ -19,10 +18,9 @@ namespace SupleNet.API.Controllers
             _mediator = mediator;
         }
 
-        [Authorize(Roles = "Admin, Customer")]
         [ProducesResponseType<Result<GetBrandsQueryResponse[]>>(StatusCodes.Status200OK)]
         [HttpGet]
-        public async Task<ActionResult<Result<GetBrandsQueryResponse[]>>> GetBrandsAdmin([FromQuery]GetBrandsQuery query)
+        public async Task<ActionResult<Result<GetBrandsQueryResponse[]>>> GetBrands([FromQuery]GetBrandsQuery query)
         {
             var result = await _mediator.Send(query);
             return StatusCode((int)result.HttpStatusCode, result);

@@ -3,7 +3,7 @@ using SupleNet.Domain.Entities;
 
 namespace SupleNet.Application.Interfaces.Persistence.Repositories
 {
-    public interface IBrandRepository : IGenericRepository<Brand> 
+    public interface IBrandRepository : IGenericRepository<Brand>, IExistByNameRepository<Brand>
     {
 
     }

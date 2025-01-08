@@ -3,7 +3,7 @@ using SupleNet.Domain.Entities;
 
 namespace SupleNet.Application.Interfaces.Persistence.Repositories
 {
-    public interface ICategoryRepository : IGenericRepository<Category>
+    public interface ICategoryRepository : IGenericRepository<Category>, IExistByNameRepository<Category>
     {
     }
 }

@@ -1,16 +1,6 @@
-﻿namespace SupleNet.Application.UseCases.Brand.Queries.GetBrands
-{
-    public class GetBrandsQueryResponse
-    {
-        public GetBrandsQueryResponse(Guid id, string name, DateTime createdDate)
-        {
-            Id = id;
-            Name = name;
-            CreatedDate = createdDate;
-        }
+﻿using SupleNet.Application.UseCases.Common;
 
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public DateTime CreatedDate { get; set; }
-    }
+namespace SupleNet.Application.UseCases.Brand.Queries.GetBrands
+{
+    public record GetBrandsQueryResponse(Guid Id, string Name, DateTime CreatedDate) : GetItemsQueryBaseResponse(Id, Name, CreatedDate);
 }
