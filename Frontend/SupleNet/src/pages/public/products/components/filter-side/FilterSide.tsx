@@ -14,7 +14,7 @@ interface FilterSideProps
     filterType: FilterGeneric,
     title: string, 
     value: string,
-    setValue: (key: string, newValue: string) => void
+    setValue: (newValue: string) => void
 }
 
 export function FilterSide({filterType, title, value, setValue}: FilterSideProps)
@@ -32,16 +32,16 @@ export function FilterSide({filterType, title, value, setValue}: FilterSideProps
         return <div>Error: {error}</div>
     }
 
-    
+    console.log(value);
 
     return(
         <div className={`${filterType === 'brand'? classBrand: classCategory}`}>
             <p className="text-violet-700 font-semibold text-lg">{title}</p>
-            {filterType === 'brand' ? <InputRadio label="Todos" nameProperty={filterType}  setValue={setValue} checked={true} value="" key="0"></InputRadio>
-            :<InputRadio label="Todas las categorías" nameProperty={filterType} setValue={setValue} hecked={true} value="" key="0"></InputRadio>}
+            {filterType === 'brand' ? <InputRadio label="Todos" nameProperty={filterType}  setValue={setValue} checked={value===''} value="" key="0"></InputRadio>
+            :<InputRadio label="Todas las categorías" nameProperty={filterType} setValue={setValue} checked={value===''} value="" key="0"></InputRadio>}
             {data.map(e=>
                 {
-                    return(<InputRadio label={e.name} nameProperty={filterType} setValue={setValue} hecked={false} value={e.id} key={e.id}></InputRadio>);
+                    return(<InputRadio label={e.name} nameProperty={filterType} setValue={setValue} checked={value===e.id} value={e.id} key={e.id}></InputRadio>);
                 }
             )}
         </div>
