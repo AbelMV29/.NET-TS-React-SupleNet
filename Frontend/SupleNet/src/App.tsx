@@ -1,3 +1,4 @@
+import { GlobalShoppingCartContextProvider } from "./context/shopping-cart-context";
 import { GlobalAuthContextProvider } from "./context/user-context";
 import { Router } from "./Router";
 
@@ -5,7 +6,9 @@ function App() {
 
   return (
     <GlobalAuthContextProvider>
-      <Router></Router>
+      <GlobalShoppingCartContextProvider>
+        <Router></Router>
+      </GlobalShoppingCartContextProvider>
     </GlobalAuthContextProvider>  
   );
 }
