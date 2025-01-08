@@ -3,6 +3,7 @@ import { Input } from "../../../../components/input/Input";
 import { ResultSearch } from "../../components/result-search/ResultSearch";
 import { useState } from "react";
 import { CurrentUser } from "../current-user/CurrentUser";
+import { ProductNavItem } from "../products-nav-item/ProductsNavItem";
 
 export function Navbar()
 {
@@ -12,21 +13,19 @@ export function Navbar()
     return(
         <nav className="flex flex-row gap-8 justify-between items-center lg:px-20 2xl:px-40 py-3 border-b-violet-700 border-b-[1px]">
             <h1 className="font-bold text-2xl text-violet-700">SupleNet</h1>
-            <ul className="flex flex-row gap-5 font-semibold capitalize">
+            <ul className="flex flex-row gap-5 font-semibold">
                 <li>
                     <NavLink to={"/"}>
                         Inicio
                     </NavLink>
                 </li>
-                <li >
-                    <NavLink to={"products"}>
-                        Suplementos
-                    </NavLink>
+                <li>
+                    <ProductNavItem></ProductNavItem>
                 </li>
                 <li>
-                <NavLink to={"products"}>
-                    Accesorios
-                </NavLink>
+                    <NavLink to={"products"}>
+                        Contacto
+                    </NavLink>
                 </li>
             </ul>
             <div className="w-[350px]">

@@ -7,12 +7,34 @@
 :root {
   font-family: Lexend, "Noto Sans", sans-serif;
 }
+body {
+  background-color: #ffffff; /* Fondo blanco */
+  background-image: 
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Crect x='60' y='60' width='70' height='10' fill='none' stroke='%23929292' stroke-opacity='0.3' stroke-width='2'/%3E%3Crect x='50' y='55' width='10' height='20' fill='none' stroke='%23929292' stroke-opacity='0.3' stroke-width='2'/%3E%3Crect x='130' y='55' width='10' height='20' fill='none' stroke='%23929292' stroke-opacity='0.3' stroke-width='2'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Crect x='180' y='180' width='40' height='50' fill='none' stroke='%23929292' stroke-opacity='0.3' stroke-width='2'/%3E%3Cline x1='180' y1='185' x2='220' y2='185' stroke='%23929292' stroke-opacity='0.3' stroke-width='2'/%3E%3Ctext x='185' y='215' font-family='Arial' font-size='12' fill='%23929292' fill-opacity='0.3'%3EPROTEIN%3C/text%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 400px 400px; /* Aumenta la separación */
+}
+
+
+
 .active
 {
   @apply text-violet-800;
 }
 
-ul>li
+ul>li>NavLink>a
 {
    @apply hover:text-violet-500 transition-colors
+}
+
+#categories
+{
+  color: black !important;
+  box-shadow: 0px 5px 15px 2px rgba(0,0,0,0.3);
+}
+
+#categories>a:hover
+{
+  @apply text-violet-700 !important;
 }

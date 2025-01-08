@@ -38,7 +38,7 @@ export function WithOutGuard()
         if(value?.["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] === 'Customer')
             navigate("/");
         else if(value?.["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] === 'Admin')
-            navigate("admin/index")
+            navigate("admin")
     })
 
     if(value)
