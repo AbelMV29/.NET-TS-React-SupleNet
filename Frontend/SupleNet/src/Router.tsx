@@ -8,6 +8,7 @@ import { HomeAdminPage } from "./pages/private/admin/home-admin/HomeAdminPage";
 import { AuthGuard } from "./guards/AuthGuard";
 import { WithOutAuthGuard } from "./guards/WithOutAuthGuard";
 import { ProductsPage } from "./pages/public/products/ProductsPage";
+import { CartPage } from "./pages/private/customer/cart/CartPage";
 
 export function Router()
 {
@@ -23,7 +24,9 @@ export function Router()
                         <Route path="login" element={<LoginPage/>}></Route>
                         <Route path="register" element={<RegisterPage/>}></Route>
                     </Route>            
-
+                    <Route path="customer" element={(<AuthGuard role={"Customer"}></AuthGuard>)}>
+                        <Route path="cart" element={(<CartPage></CartPage>)}></Route>
+                    </Route>
                     <Route path="admin" element={(<AuthGuard role={"Admin"}></AuthGuard>)}>
                         <Route path="" element={<HomeAdminPage/>}></Route>
                     </Route>

@@ -5,8 +5,7 @@ import { useState } from "react";
 
 export function ProductNavItem()
 {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [loaded, error, name, setName, orderByDate, setOrderByDate, data] = useFetchNameOrder<Category>("/category");
+    const {loaded, error, data} = useFetchNameOrder<Category>("/category");
     const [isHover, setIsHover] = useState(false);
     return(
         <NavLink to={"products"} className="relative w-max" onMouseEnter={()=>{setIsHover(true)}} onMouseLeave={()=>{setIsHover(false)}}>

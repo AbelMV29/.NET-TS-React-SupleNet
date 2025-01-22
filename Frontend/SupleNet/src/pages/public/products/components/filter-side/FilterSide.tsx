@@ -20,7 +20,7 @@ interface FilterSideProps
 export function FilterSide({filterType, title, value, setValue}: FilterSideProps)
 {
     const path = filterType === 'brand' ? '/brands' : '/category';
-    const [loaded, error, name, setName, order, setOrder, data] = useFetchNameOrder<Category | Brand>(path);
+    const {loaded, error, data} = useFetchNameOrder<Category | Brand>(path);
 
     if(!loaded)
         {
@@ -32,7 +32,6 @@ export function FilterSide({filterType, title, value, setValue}: FilterSideProps
         return <div>Error: {error}</div>
     }
 
-    console.log(value);
 
     return(
         <div className={`${filterType === 'brand'? classBrand: classCategory}`}>
