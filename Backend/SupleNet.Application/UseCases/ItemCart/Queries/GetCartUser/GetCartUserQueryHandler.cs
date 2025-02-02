@@ -11,6 +11,15 @@ namespace SupleNet.Application.UseCases.ItemCart.Queries.GetCartUser
     {
         private readonly IItemCartRepository _itemCartRepository;
         private readonly IHttpContextAccessor _httpContext;
+
+        private GetCartUserQueryResponse _emptyValue = new GetCartUserQueryResponse([], 0);
+
+        public GetCartUserQueryHandler(IItemCartRepository itemCartRepository, IHttpContextAccessor httpContext)
+        {
+            _itemCartRepository = itemCartRepository;
+            _httpContext = httpContext;
+        }
+
         public async Task<Result<GetCartUserQueryResponse>> Handle(GetCartUserQuery request, CancellationToken cancellationToken)
         {
             var currentUserId = new Guid(_httpContext.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
@@ -18,7 +27,7 @@ namespace SupleNet.Application.UseCases.ItemCart.Queries.GetCartUser
             var itemsCart = await _itemCartRepository.GetCartUser(currentUserId);
 
             if (itemsCart.Length == 0)
-                return Result<GetCartUserQueryResponse>.Success(null, null, HttpStatusCode.OK);
+                return Result<GetCartUserQueryResponse>.Success(_emptyValue, null, HttpStatusCode.OK);
 
             var itemsResult = itemsCart.Select(i =>
             {
@@ -29,7 +38,7 @@ namespace SupleNet.Application.UseCases.ItemCart.Queries.GetCartUser
 
             var result = new GetCartUserQueryResponse(itemsResult, totalPrice);
 
-            return Result<GetCartUserQueryResponse>.Success(null, null, HttpStatusCode.OK);
+            return Result<GetCartUserQueryResponse>.Success(result, null, HttpStatusCode.OK);
         }
     }
 

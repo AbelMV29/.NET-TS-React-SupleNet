@@ -7,7 +7,7 @@ namespace SupleNet.Application.UseCases.Category.Queries.GetCategories
         public GetCategoriesQueryValidator()
         {
             RuleFor(x => x.OrderByDate)
-                .NotEmpty().WithMessage("El Orden por fecha es obligatorio");
+                .NotNull().WithMessage("El Orden por fecha es obligatorio");
         }
     }
 }

@@ -11,6 +11,11 @@ namespace SupleNet.Application.UseCases.ItemCart.Command.AddItemCart
     {
         private readonly IHttpContextAccessor _httpContext;
         private readonly IItemCartRepository _itemCartRepository;
+        public AddItemCartCommandHandler(IHttpContextAccessor httpContext, IItemCartRepository itemCartRepository)
+        {
+            _httpContext = httpContext;
+            _itemCartRepository = itemCartRepository;
+        }
         public async Task<Result<Unit>> Handle(AddItemCartCommand request, CancellationToken cancellationToken)
         {
             var currentUserId = new Guid(_httpContext.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));

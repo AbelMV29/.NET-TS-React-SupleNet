@@ -7,7 +7,7 @@ namespace SupleNet.Application.UseCases.Brand.Queries.GetBrands
         public GetBrandsQueryValidator()
         {
             RuleFor(x => x.OrderByDate)
-                .NotEmpty().WithMessage("El Orden por fecha es obligatorio");
+                .NotNull().WithMessage("El Orden por fecha es obligatorio");
         }
     }
 }
