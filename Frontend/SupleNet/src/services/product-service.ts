@@ -35,3 +35,16 @@ export async function GetProducts({page = 1, name = "", filterProducts = FIlterP
         throw new Error("Error al obtener los datos, código: "+error)
     });
 }
+
+export async function AddProduct(data: FormData, controller: AbortController) : Promise<Result<object>>
+{
+    return supleNetInstanceAxios
+    .post<Result<object>>('/products', data, {signal: controller.signal, headers: {'Content-Type': 'multipart/form-data'}})
+    .then(response=>
+    {
+        return response.data;
+    })
+    .catch(error=>{
+        throw new Error(error.response?.data||"Error al obtener los datos")
+    });
+}

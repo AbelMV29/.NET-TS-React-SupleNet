@@ -8,7 +8,7 @@ using SupleNet.Application.UseCases.AppUser.Command.Register;
 namespace SupleNet.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
         private readonly IMediator _mediator;

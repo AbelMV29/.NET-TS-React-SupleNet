@@ -7,12 +7,12 @@ import { Link } from "react-router";
 import { useState } from "react";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { toast } from "sonner";
 import { FormInput } from "../../../../../components/form-input/FormInput";
 import { useAuthContext } from "../../../../../context/user-context";
+import { toastAlert } from "../../../../../utils/util";
 
 export function LoginForm() {
-  const { control, handleSubmit, formState: { errors } } = useForm<LoginFormType>({
+  const { control, handleSubmit, getValues, formState: { errors } } = useForm<LoginFormType>({
     resolver: zodResolver(schema),
     defaultValues:
     {
@@ -29,10 +29,10 @@ export function LoginForm() {
       try {
         const result = await LoginService(data, controller);
         setValue(result.data);
-        toast.success(result.message, { duration: 3000, className: "bg-violet-700 text-white font-bold" });
+        toastAlert('success', result.message ?? '');
       } catch (err) {
         const error = err as Error;
-        toast.error(error.message, { duration: 3000, className: "bg-red-500 text-white font-bold" });
+        toastAlert('error', error.message);
       }
     }
     fetchSignIn();

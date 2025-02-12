@@ -1,7 +1,4 @@
 import { useEffect, useState } from "react";
-import { GetProducts } from "../services/product-service";
-import { Result } from "../models/common";
-import { PaginationProducts } from "../models/product";
 
 interface UseFetchProps<T> {
     dependencyChanges: unknown[]
@@ -20,13 +17,16 @@ export function useFetch<T>({ action, dependencyChanges }: UseFetchProps<T>) {
             try {
                 setData(await action(controller));
             }
-            catch (err) {
-                const error = err as Error;
-                setError(error.message)
+            catch (error) {
+                const err = error as Error;
+                if(err.name === 'AbortError')
+                    return;
+                setError(err.message)
             }
             finally
             {
-                setLoaded(true);
+                if(!controller.signal.aborted)
+                    setLoaded(true);
             }
         }
         fetch();
@@ -38,16 +38,4 @@ export function useFetch<T>({ action, dependencyChanges }: UseFetchProps<T>) {
     )
 
     return {loaded, error, data}
-}
-
-export function Uso() {
-    const [name, setName] = useState("");
-    GetProducts({ name: "", page: 1 }, new AbortController())
-    useFetch<Result<PaginationProducts>>({
-        action: (controller) => {
-            return GetProducts({ name: "", page: 1 }, controller)
-        }, dependencyChanges: [name]
-    })
-
-    return (<></>);
 }

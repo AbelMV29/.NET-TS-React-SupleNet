@@ -17,7 +17,6 @@ namespace SupleNet.API.Controllers
         {
             _mediator = mediator;
         }
-
         [ProducesResponseType<Result<GetBrandsQueryResponse[]>>(StatusCodes.Status200OK)]
         [HttpGet]
         public async Task<ActionResult<Result<GetBrandsQueryResponse[]>>> GetBrands([FromQuery]GetBrandsQuery query)

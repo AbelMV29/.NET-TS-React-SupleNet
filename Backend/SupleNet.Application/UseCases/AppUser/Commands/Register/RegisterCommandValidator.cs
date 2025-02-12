@@ -22,6 +22,9 @@ namespace SupleNet.Application.UseCases.AppUser.Command.Register
                 .NotEmpty().WithMessage("La Contraseña es obligatoria")
                 .Matches(@"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{6,15}").WithMessage("La contraseña debe tener entre 6 y 15 caracteres, incluir al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.");
 
+            RuleFor(x => x.ConfirmPassword)
+                .Equal(x => x.Password).WithMessage("Las contraseñas deben coincidir");
+
             RuleFor(x => x.PhoneNumber)
                 .NotEmpty().WithMessage("El número de telefono es obligatorio")
                 .Matches(@"^\+54 \d{1,2} \d{1,4} \d{8}$").WithMessage("El número de teléfono debe comenzar con +54, seguido de 1 o 2 dígitos, luego 1 a 4 dígitos, y finalmente 8 dígitos.");

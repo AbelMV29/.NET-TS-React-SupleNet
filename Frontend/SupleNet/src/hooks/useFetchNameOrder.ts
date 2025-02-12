@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { GetByNameOrder } from "../services/common-service";
 
-export function useFetchNameOrder<T>(url:string) : 
-[boolean, string | null, string, React.Dispatch<React.SetStateAction<string>>, boolean, React.Dispatch<React.SetStateAction<boolean>>, T[]]
+export function useFetchNameOrder<T>(url:string) 
 {
     const [loaded, setLoaded] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -48,5 +47,5 @@ export function useFetchNameOrder<T>(url:string) :
         });
     }, [name, orderByDate, url]);
 
-    return [loaded, error, name, setName, orderByDate, setOrderByDate, data]
+    return {loaded, error, name, setName, orderByDate, setOrderByDate, data}
 }

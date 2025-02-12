@@ -5,6 +5,7 @@ using SupleNet.Application;
 using SupleNet.Persistence;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
+using Microsoft.AspNetCore.Components.Routing;
 
 namespace SupleNet.API
 {
@@ -22,6 +23,17 @@ namespace SupleNet.API
             builder.Services.AddPersistence(builder.Configuration);
             builder.Services.AddApplication();
             builder.Services.AddCloudinary(builder.Configuration);
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(policy =>
+                {
+                    policy.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod();
+                });
+            });
+            builder.Services.Configure<RouteOptions>(options =>
+            {
+                options.LowercaseUrls = true;
+            });
 
             var app = builder.Build();
 
@@ -31,7 +43,7 @@ namespace SupleNet.API
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            app.UseCors();
             app.UseHttpsRedirection();
 
             app.UseAuthentication();

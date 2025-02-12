@@ -59,7 +59,7 @@ namespace SupleNet.Persistence.Services
                 Email = registerCommand.Email,
                 UserName = registerCommand.Email,
                 Name = registerCommand.Name,
-                LastName = registerCommand.Name,
+                LastName = registerCommand.LastName,
                 EmailConfirmed = false,
                 PhoneNumber = registerCommand.PhoneNumber
             };

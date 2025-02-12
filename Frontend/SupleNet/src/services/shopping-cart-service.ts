@@ -16,3 +16,52 @@ export async function getCurrentCart() : Promise<Result<ShoppingCart>>
         {throw new Error();}
     )
 }
+
+export async function addItemToCart(productId: string, controller: AbortController)
+{
+    return await supleNetInstanceAxios
+    .put<Result<object>>(`/cart/additem`, {productId: productId}, {signal:controller.signal})
+    .then(response=>
+        {
+            return response.data;
+        }
+    )
+    .catch(error =>
+    {
+        throw new Error(error.response?.data || "Ocurrió un error inesperado");
+    }
+    );
+    
+}
+
+export async function removeItemFromCart(productId: string, controller: AbortController)
+{
+    return await supleNetInstanceAxios
+    .put<Result<object>>(`/cart/removeitem`, {productId: productId}, {signal:controller.signal})
+    .then(response=>
+        {
+            return response.data;
+        }
+    )
+    .catch(error =>
+    {
+        throw new Error(error.response?.data || "Ocurrió un error inesperado");
+    }
+    );
+}
+
+export async function removeFullItemFromCart(productId: string, controller: AbortController)
+{
+    return await supleNetInstanceAxios
+    .put<Result<object>>(`/cart/removefullitem`, {productId: productId}, {signal:controller.signal})
+    .then(response=>
+        {
+            return response.data;
+        }
+    )
+    .catch(error =>
+    {
+        throw new Error(error.response?.data || "Ocurrió un error inesperado");
+    }
+    );
+}

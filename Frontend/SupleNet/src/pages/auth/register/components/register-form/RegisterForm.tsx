@@ -8,7 +8,7 @@ import { useState } from "react";
 import { Button } from "../../../../../components/button/Button";
 import { Link, useNavigate } from "react-router";
 import { RegisterService } from "../../../../../services/auth-service";
-import { toast } from "sonner";
+import { toastAlert } from "../../../../../utils/util";
 
 export function RegisterForm() {
   const { control, handleSubmit, formState: { errors } } = useForm<RegisterFormType>({
@@ -33,11 +33,10 @@ export function RegisterForm() {
     const fetchSignUp = async () => {
       try {
         const result = await RegisterService(data, controller);
-        toast.success(result.message, { duration: 3000, className: "bg-violet-700 text-white font-bold" });
-        navigate('/login');
+        toastAlert('success', result.message ?? ''); navigate('/login');
       } catch (err) {
         const error = err as Error;
-        toast.error(error.message, { duration: 3000, className: "bg-red-500 text-white font-bold" });
+        toastAlert('error', error.message);
       }
     }
     fetchSignUp();
