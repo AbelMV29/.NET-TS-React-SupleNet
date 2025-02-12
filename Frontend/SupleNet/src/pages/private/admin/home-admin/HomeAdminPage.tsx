@@ -1,6 +1,7 @@
 import { LastActivity } from "./components/last-activity/LastActivity";
 import { SummarytSales } from "./components/summary-sales/SummarySales";
 import { Header } from "./components/header/Header";
+import { CreateProductForm } from "../create-product/components/CreateProductForm";
 
 export function HomeAdminPage()
 {
@@ -11,5 +12,6 @@ export function HomeAdminPage()
             <SummarytSales/>
             <LastActivity/>
         </div>
+        <CreateProductForm></CreateProductForm>
     </div>);
 }

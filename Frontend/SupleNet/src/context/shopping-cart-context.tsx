@@ -23,6 +23,11 @@ export function GlobalShoppingCartContextProvider({children}: {children : ReactN
 
     useEffect(()=>
     {
+        if(!valueAuth || valueAuth?.["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] !== "Customer")
+        {
+            setValue(null);
+            return;
+        }
         const fetchCurrentCart = async()=>
         {
             try
@@ -37,8 +42,6 @@ export function GlobalShoppingCartContextProvider({children}: {children : ReactN
 
         fetchCurrentCart();
     }, [valueAuth])
-
-    console.log(value);
 
     return (
         <shoppingCartContext.Provider value={{value, setValue}}>{children}</shoppingCartContext.Provider>

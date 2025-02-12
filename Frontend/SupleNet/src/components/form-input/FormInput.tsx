@@ -10,7 +10,7 @@ interface FormInputProps<T extends FieldValues>
     placeholder: string,
     errorMessage: string | undefined,
     relative: boolean
-    children?: React.ReactNode
+    children?: React.ReactNode,
 }
 
 export function FormInput<T extends FieldValues>({name, control, label, type, placeholder, errorMessage, relative, children} : FormInputProps<T>)

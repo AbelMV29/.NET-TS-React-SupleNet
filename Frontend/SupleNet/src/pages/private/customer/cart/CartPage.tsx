@@ -1,3 +1,4 @@
+import React from "react";
 import { useShoppingCartContext } from "../../../../context/shopping-cart-context";
 import { ShoppingCartItem } from "./components/shopping-cart-item/ShoppingCartItem";
 
@@ -9,9 +10,10 @@ export function CartPage()
         <div className="flex flex-col gap-4 bg-white shadow-lg p-4 rounded-xl">
             <h3 className="text-2xl font-bold text-violet-700">Artículos en el carrito</h3>
             {value && value.itemsCart.length>0? value.itemsCart.map((item)=>{
-                return (<>
-                <ShoppingCartItem key={item.productId} {...item}></ShoppingCartItem>
-                <hr></hr></>);
+                return (<React.Fragment key={item.productId}>
+                    <ShoppingCartItem {...item} />
+                    <hr />
+                  </React.Fragment>);
             }):<p>Sin productos en el carrito</p>}
             {value && value.totalPrice>0 && "$"+value.totalPrice.toFixed(2)}
         </div>

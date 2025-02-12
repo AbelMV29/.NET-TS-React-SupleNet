@@ -12,7 +12,7 @@ import { useAuthContext } from "../../../../../context/user-context";
 import { toastAlert } from "../../../../../utils/util";
 
 export function LoginForm() {
-  const { control, handleSubmit, formState: { errors } } = useForm<LoginFormType>({
+  const { control, handleSubmit, getValues, formState: { errors } } = useForm<LoginFormType>({
     resolver: zodResolver(schema),
     defaultValues:
     {
