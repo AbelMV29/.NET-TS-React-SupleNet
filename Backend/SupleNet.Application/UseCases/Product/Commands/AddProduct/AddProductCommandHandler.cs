@@ -75,9 +75,7 @@ namespace SupleNet.Application.UseCases.Product.Commands.AddProduct
 
                 productToAdd.Image = imageResponse.Url;
                 var productAddedTask = _productRepository.AddAsync(productToAdd);
-
                 List<Gallery> galleries = new List<Gallery>();
-                
 
                 foreach (var cloudResponse in cloudResponses)
                 {
